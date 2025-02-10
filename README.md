@@ -1,6 +1,6 @@
 ﻿# SpendWise
 
-**SpendWise** é um sistema para gerenciamento de gastos do Mercado Pago em desenvolvimento. Ele é construído com React e Vite, utilizando os frameworks Tailwind, React Router e Lucide.
+**SpendWise** é um sistema para gerenciamento de gastos do Mercado Pago em desenvolvimento, construído com React e Vite.
 
 ## Funcionalidades
 
