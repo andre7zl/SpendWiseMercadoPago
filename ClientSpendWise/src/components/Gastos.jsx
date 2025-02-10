@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function Gastos() {
   const [gastos, setGastos] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -20,7 +22,6 @@ function Gastos() {
 
   function formatarData(dataString) {
     if (!dataString) return "Data inválida";
-
     const data = new Date(dataString);
 
     return new Intl.DateTimeFormat("pt-BR", {
@@ -34,6 +35,12 @@ function Gastos() {
     }).format(data);
   }
 
+  function onSeeDetailsClick(gasto) {
+    const valorFormatado = encodeURIComponent(gasto.valor);
+    const dataFormatada = encodeURIComponent(gasto.dataFormatada);
+    navigate(`/gasto?valor=${valorFormatado}&dataFormatada=${dataFormatada}`);
+  }
+
   return (
     <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
       {gastos.map((gasto) => (
@@ -41,7 +48,10 @@ function Gastos() {
           <button className="w-full bg-slate-400 text-white p-2 rounded-md text-left">
             R${gasto.valor} - {gasto.dataFormatada}
           </button>
-          <button className="bg-slate-400 text-white p-2 rounded-md text-left">
+          <button
+            onClick={() => onSeeDetailsClick(gasto)}
+            className="bg-slate-400 text-white p-2 rounded-md text-left"
+          >
             <ChevronRight />
           </button>
         </li>
