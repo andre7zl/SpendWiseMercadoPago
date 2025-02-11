@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 function Gastos() {
   const [gastos, setGastos] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const itensPorPagina = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,6 +16,10 @@ function Gastos() {
         const gastosFormatados = response.data.map((gasto) => ({
           ...gasto,
           dataFormatada: formatarData(gasto.data),
+          valorFormatado: new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(gasto.valor),
         }));
         setGastos(gastosFormatados);
       })
@@ -41,22 +47,63 @@ function Gastos() {
     navigate(`/gasto?valor=${valorFormatado}&dataFormatada=${dataFormatada}`);
   }
 
+  const indiceInicial = (paginaAtual - 1) * itensPorPagina;
+  const gastosPaginados = gastos.slice(
+    indiceInicial,
+    indiceInicial + itensPorPagina
+  );
+  const totalPaginas = Math.ceil(gastos.length / itensPorPagina);
+
   return (
-    <ul className="space-y-4 p-6 bg-slate-200 rounded-md shadow">
-      {gastos.map((gasto) => (
-        <li key={gasto.id} className="flex gap-2">
-          <button className="w-full bg-slate-400 text-white p-2 rounded-md text-left">
-            R${gasto.valor} - {gasto.dataFormatada}
-          </button>
-          <button
-            onClick={() => onSeeDetailsClick(gasto)}
-            className="bg-slate-400 text-white p-2 rounded-md text-left"
+    <div className="p-6 bg-gray-900 rounded-lg shadow w-full mx-auto">
+      <ul className="space-y-4">
+        {gastosPaginados.map((gasto) => (
+          <li
+            key={gasto.id}
+            className="flex items-center justify-between bg-gray-800 p-4 rounded-lg shadow text-white"
           >
-            <ChevronRight />
+            <div>
+              <span className="text-lg font-semibold">
+                {gasto.valorFormatado}
+              </span>
+              <p className="text-gray-400 text-sm">{gasto.dataFormatada}</p>
+            </div>
+            <button
+              onClick={() => onSeeDetailsClick(gasto)}
+              className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md"
+            >
+              <ChevronRight />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <div className="flex justify-between items-center mt-6">
+        <span className="text-white text-sm">
+          Mostrando {gastosPaginados.length} de {gastos.length} gastos
+        </span>
+        <nav className="flex items-center space-x-2" aria-label="Pagination">
+          <button
+            onClick={() => setPaginaAtual((prev) => Math.max(prev - 1, 1))}
+            disabled={paginaAtual === 1}
+            className="px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-gray-600 disabled:opacity-50"
+          >
+            Anterior
           </button>
-        </li>
-      ))}
-    </ul>
+          <span className="px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md">
+            Página {paginaAtual} de {totalPaginas}
+          </span>
+          <button
+            onClick={() =>
+              setPaginaAtual((prev) => Math.min(prev + 1, totalPaginas))
+            }
+            disabled={paginaAtual === totalPaginas}
+            className="px-4 py-2 text-sm font-medium text-white bg-gray-700 rounded-md hover:bg-gray-600 disabled:opacity-50"
+          >
+            Próximo
+          </button>
+        </nav>
+      </div>
+    </div>
   );
 }
 

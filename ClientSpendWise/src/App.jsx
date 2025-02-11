@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="w-screen h-screen flex">
       {/* Sidebar */}
-      <div className="w-64 h-full bg-slate-700 p-4 flex flex-col space-y-2">
+      <div className="w-64 h-full bg-gray-900  p-4 flex flex-col space-y-2">
         <h2 className="text-white text-2xl font-bold">Menu</h2>
         <button
           className={`flex items-center mt-5 p-2 text-white rounded-lg transition ${
@@ -30,11 +30,8 @@ function App() {
       </div>
 
       {/* Conteúdo Principal */}
-      <div className="flex-1 bg-slate-500 flex justify-center p-6">
-        <div className="w-[500px] space-y-4">
-          <h1 className="text-3xl text-slate-100 font-bold text-center">
-            SpendWise
-          </h1>
+      <div className="flex-1 bg-gray-800  flex justify-center p-6">
+        <div className="w-full space-y-4">
           {activeTab === "gastos" ? (
             <Gastos />
           ) : (
