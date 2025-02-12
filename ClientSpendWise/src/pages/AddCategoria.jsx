@@ -1,14 +1,25 @@
 import { ChevronLeft } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Wallet, List } from "lucide-react";
+import useCategorias from "../components/useCategorias";
 
 function AddCategoria() {
   const [activeTab, setActiveTab] = useState("gastos");
   const [searchParams] = useSearchParams();
   const valor = searchParams.get("valor");
   const dataFormatada = searchParams.get("dataFormatada");
+  const gastoId = searchParams.get("id"); // Pegando o ID do gasto
   const navigate = useNavigate();
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
+  const [gastoAtualizadoId, setGastoAtualizadoId] = useState(gastoId); // Estado para o ID do gasto
+  const categorias = useCategorias();
+
+  useEffect(() => {
+    if (categoriaSelecionada) {
+      setGastoAtualizadoId(categoriaSelecionada); // Atualiza o ID do gasto com o ID da categoria
+    }
+  }, [categoriaSelecionada]);
 
   if (!valor || !dataFormatada) {
     return (
@@ -21,7 +32,7 @@ function AddCategoria() {
   return (
     <div className="w-screen h-screen bg-gray-800 flex">
       {/* Sidebar */}
-      <div className="w-64 h-full bg-gray-900  p-4 flex flex-col space-y-2">
+      <div className="w-64 h-full bg-gray-900 p-4 flex flex-col space-y-2">
         <h2 className="text-white text-2xl font-bold">SpendWise</h2>
         <button
           className={`flex items-center mt-5 p-2 text-white rounded-lg transition ${
@@ -55,13 +66,41 @@ function AddCategoria() {
               Detalhes do Gasto
             </h1>
           </div>
+
+          <div className="p-4 bg-gray-700 rounded-lg">
+            <h2 className="text-lg font-semibold">ID do Gasto:</h2>
+            <p className="text-gray-300">{gastoAtualizadoId}</p>{" "}
+            {/* Mostra o ID atualizado */}
+          </div>
+
           <div className="p-4 bg-gray-700 rounded-lg">
             <h2 className="text-lg font-semibold">Valor:</h2>
             <p className="text-xl text-green-400 font-semibold">{valor}</p>
           </div>
+
           <div className="p-4 bg-gray-700 rounded-lg">
             <h2 className="text-lg font-semibold">Data:</h2>
             <p className="text-gray-300">{dataFormatada}</p>
+          </div>
+
+          <div className="p-4 bg-gray-700 rounded-lg">
+            <label className="block text-lg font-semibold mb-2">
+              Categoria:
+            </label>
+            <select
+              value={categoriaSelecionada}
+              onChange={(e) => setCategoriaSelecionada(e.target.value)}
+              className="bg-gray-800 text-white p-2 rounded-lg w-full"
+            >
+              <option value="" disabled>
+                Selecione uma categoria
+              </option>
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.nome}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

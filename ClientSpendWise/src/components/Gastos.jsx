@@ -50,7 +50,9 @@ function Gastos() {
   function addCategoriaClick(gasto) {
     const valorFormatado = encodeURIComponent(gasto.valor);
     const dataFormatada = encodeURIComponent(gasto.dataFormatada);
-    navigate(`/gasto?valor=${valorFormatado}&dataFormatada=${dataFormatada}`);
+    navigate(
+      `/add-categoria?valor=${valorFormatado}&dataFormatada=${dataFormatada}`
+    );
   }
 
   const indiceInicial = (paginaAtual - 1) * itensPorPagina;
@@ -79,7 +81,6 @@ function Gastos() {
                   <p className="text-gray-400 text-sm">{gasto.dataFormatada}</p>
                 </div>
 
-                {/* Botões lado a lado */}
                 <div className="flex gap-2">
                   <button
                     onClick={() => onSeeDetailsClick(gasto)}
