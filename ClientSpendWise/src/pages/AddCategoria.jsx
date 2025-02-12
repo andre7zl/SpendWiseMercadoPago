@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Wallet, List } from "lucide-react";
 
-function GastoPage() {
+function AddCategoria() {
   const [activeTab, setActiveTab] = useState("gastos");
   const [searchParams] = useSearchParams();
   const valor = searchParams.get("valor");
@@ -69,4 +69,4 @@ function GastoPage() {
   );
 }
 
-export default GastoPage;
+export default AddCategoria;
