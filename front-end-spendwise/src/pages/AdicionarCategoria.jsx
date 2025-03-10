@@ -25,7 +25,7 @@ function AdicionarCategoria() {
             <ChevronLeft size={24} />
           </button>
           <h1 className="text-2xl font-bold text-center flex-1">
-            Detalhes do AdicionarCategoria
+            Adicionar Categoria
           </h1>
         </div>
         <div className="p-4 bg-zinc-800 rounded-lg">

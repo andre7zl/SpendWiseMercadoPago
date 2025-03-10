@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ChevronLeft, ChevronRight, PlusSquare } from "lucide-react";
+import { ChevronLeft, ChevronRight, SquarePen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 function GastosCategorizados() {
@@ -40,7 +40,7 @@ function GastosCategorizados() {
 
   function onSeeDetailsClick(gasto) {
     navigate(
-      `/gasto?valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}`
+      `/gasto?valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}&categoria_nome=${gasto.categoria_nome}`
     );
   }
 
@@ -83,15 +83,15 @@ function GastosCategorizados() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => onSeeDetailsClick(gasto)}
-                    className="bg-zinc-500 hover:bg-zinc-400 text-white p-1"
+                    className="bg-zinc-500 hover:bg-zinc-400 text-white p-1 rounded-sm"
                   >
                     <ChevronRight />
                   </button>
                   <button
                     onClick={() => addCategoriaClick(gasto)}
-                    className="bg-green-700 hover:bg-green-600 text-white p-1"
+                    className="bg-blue-700 hover:bg-blue-600 text-white p-1 rounded-sm"
                   >
-                    <PlusSquare />
+                    <SquarePen />
                   </button>
                 </div>
               </li>

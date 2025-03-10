@@ -85,13 +85,13 @@ function GastosNaoCategorizados() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => onSeeDetailsClick(gasto)}
-                    className="bg-zinc-500 hover:bg-zinc-400 text-white p-1"
+                    className="bg-zinc-500 hover:bg-zinc-400 text-white p-1 rounded-sm border border-zinc-500"
                   >
                     <ChevronRight />
                   </button>
                   <button
                     onClick={() => addCategoriaClick(gasto)}
-                    className="bg-green-700 hover:bg-green-600 text-white p-1"
+                    className="bg-green-700 hover:bg-green-600 text-white p-1 rounded-sm border border-green-700"
                   >
                     <PlusSquare />
                   </button>
@@ -110,7 +110,7 @@ function GastosNaoCategorizados() {
             <button
               onClick={() => setPaginaAtual((prev) => Math.max(prev - 1, 1))}
               disabled={paginaAtual === 1}
-              className="p-2 text-zinc-400 hover:text-white disabled:opacity-50"
+              className="p-2 text-zinc-400 hover:text-white disabled:opacity-50 rounded-sm"
             >
               <ChevronLeft />
             </button>
@@ -122,7 +122,7 @@ function GastosNaoCategorizados() {
                 setPaginaAtual((prev) => Math.min(prev + 1, totalPaginas))
               }
               disabled={paginaAtual === totalPaginas}
-              className="p-2 text-zinc-400 hover:text-white disabled:opacity-50"
+              className="p-2 text-zinc-400 hover:text-white disabled:opacity-50 rounded-sm"
             >
               <ChevronRight />
             </button>
