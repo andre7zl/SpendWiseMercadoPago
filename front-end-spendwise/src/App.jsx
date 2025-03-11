@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import GastosCategorizados from "./pages/GastosCategorizados";
 import GastosNaoCategorizados from "./pages/GastosNaoCategorizados";
 import Home from "./pages/Home";
-import Categorias from "./pages/Categorias";
+import CategoriasLista from "./pages/CategoriasLista";
 import Dashboard from "./pages/Dashboard";
 import Gasto from "./pages/Gasto";
 import AdicionarCategoria from "./pages/AdicionarCategoria";
@@ -24,7 +24,7 @@ function App() {
             element={<GastosCategorizados />}
           />
           <Route path="gasto" element={<Gasto />} />
-          <Route path="categorias" element={<Categorias />} />
+          <Route path="categorias" element={<CategoriasLista />} />
           <Route path="add-categoria" element={<AdicionarCategoria />} />
         </Route>
       </Routes>

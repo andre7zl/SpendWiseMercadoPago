@@ -40,13 +40,13 @@ function GastosCategorizados() {
 
   function onSeeDetailsClick(gasto) {
     navigate(
-      `/gasto?valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}&categoria_nome=${gasto.categoria_nome}`
+      `/gasto?id=${gasto.id}&valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}&categoria_nome=${gasto.categoria_nome}`
     );
   }
 
   function addCategoriaClick(gasto) {
     navigate(
-      `/add-categoria?valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}`
+      `/gasto?id=${gasto.id}&valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}&categoria_nome=${gasto.categoria_nome}`
     );
   }
 
@@ -77,7 +77,9 @@ function GastosCategorizados() {
                   <span className="text-lg font-medium text-zinc-300">
                     {gasto.valorFormatado}
                   </span>
-                  <p className="text-zinc-500 text-sm">{gasto.dataFormatada}</p>
+                  <p className="text-zinc-500 text-sm">
+                    {gasto.dataFormatada} - {gasto.categoria_nome}
+                  </p>
                 </div>
 
                 <div className="flex gap-2">

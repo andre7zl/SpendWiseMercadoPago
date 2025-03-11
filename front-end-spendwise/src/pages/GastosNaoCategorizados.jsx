@@ -46,7 +46,7 @@ function GastosNaoCategorizados() {
 
   function addCategoriaClick(gasto) {
     navigate(
-      `/add-categoria?valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}`
+      `/add-categoria?id=${gasto.id}&categoriaid=${gasto.categoria_id}&valor=${gasto.valor}&dataFormatada=${gasto.dataFormatada}&categoria_nome=${gasto.categoria_nome}`
     );
   }
 

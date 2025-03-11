@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Chart from "chart.js/auto";
+import GraficoBarras from "../components/GraficoLinha";
 
 const Dashboard = () => {
   const URL_GASTOS = "http://127.0.0.1:8000/gastos";
@@ -117,17 +118,11 @@ const Dashboard = () => {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6">
-          <div className="flex items-center h-40 justify-between">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              Monthly Sales
-            </h3>
+          <div className="flex items-center h-75 justify-between">
+            <GraficoBarras />
             <div className="relative inline-block">
               <button className="dropdown-toggle"></button>
             </div>
-          </div>
-
-          <div className="max-w-full overflow-x-auto custom-scrollbar">
-            <div className="-ml-5 min-w-[650px] xl:min-w-full pl-2"></div>
           </div>
         </div>
       </div>
